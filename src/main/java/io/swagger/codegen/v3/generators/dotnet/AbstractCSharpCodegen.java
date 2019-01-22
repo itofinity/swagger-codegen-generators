@@ -93,6 +93,7 @@ public abstract class AbstractCSharpCodegen extends DefaultCodegenConfig {
                 Arrays.asList("IDictionary")
         );
 
+        // used as a shim to be case-sensitive
         setReservedWordsLowerCase(
                 Arrays.asList(
                         // set "client" as a reserved word to avoid conflicts with IO.Swagger.Client
@@ -114,7 +115,7 @@ public abstract class AbstractCSharpCodegen extends DefaultCodegenConfig {
                         "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed",
                         "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw",
                         "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using",
-                        "virtual", "void", "volatile", "while")
+                        "virtual", "void", "volatile", "while", "version")
         );
 
         // TODO: Either include fully qualified names here or handle in DefaultCodegen via lastIndexOf(".") search
@@ -807,7 +808,7 @@ public abstract class AbstractCSharpCodegen extends DefaultCodegenConfig {
         name = sanitizeName(name);
 
         // model name cannot use reserved keyword, e.g. return
-        if (isReservedWord(name)) {
+        if (isReservedWord(name.toLowerCase())) {
             LOGGER.warn(name + " (reserved word) cannot be used as model name. Renamed to " + camelize("model_" + name));
             name = "model_" + name; // e.g. return => ModelReturn (after camelize)
         }

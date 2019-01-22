@@ -175,6 +175,12 @@
     <dependencies>
         <dependency>
             <groupId>io.swagger.codegen.v3</groupId>
+            <artifactId>swagger-codegen-cli</artifactId>
+            <version>3.0.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.codegen.v3</groupId>
             <artifactId>swagger-codegen</artifactId>
             <version>${swagger-codegen-version}</version>
         </dependency>
